@@ -72,7 +72,7 @@ with gr.Blocks(title="IA Clube LG - Assistente Técnico") as demo:
             </script>
         </head>
         <div class="header-container">
-            <img src="file/assets/favicon-lg.png" class="header-icon">
+            <img src="/public/favicon-lg.png" class="header-icon">
             <h2>Assistente Técnico - Clube LG</h2>
         </div>
     """, visible=True)
@@ -230,7 +230,7 @@ import os
 pwa_directory = "src/pwa"
 
 # Mount assets architecture for PWA
-demo.app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+demo.app.mount("/public", StaticFiles(directory="assets"), name="public")
 
 @demo.app.get("/app-manifest.json")
 async def manifest():

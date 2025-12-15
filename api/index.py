@@ -18,7 +18,9 @@ pwa_directory = os.path.join(root_dir, "src", "pwa")
 assets_directory = os.path.join(root_dir, "assets")
 
 # Montar pasta assets
-app.mount("/assets", StaticFiles(directory=assets_directory), name="assets")
+# IMPORTANTE: Usamos '/public' e não '/assets' para evitar conflito com 
+# os arquivos internos do frontend do Gradio que também usam '/assets'
+app.mount("/public", StaticFiles(directory=assets_directory), name="public")
 
 # Rotas do PWA
 @app.get("/app-manifest.json")

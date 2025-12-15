@@ -1,6 +1,6 @@
 {
-    "name": "Clube LG - Assistente Técnico",
-    "short_name": "Assistente LG",
+    "name": "LG AI",
+    "short_name": "LG AI",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
@@ -8,12 +8,12 @@
     "description": "Assistente de validação de planilhas Clube LG",
     "icons": [
         {
-            "src": "/assets/favicon-lg.png",
+            "src": "/public/favicon-lg.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/assets/LG-AI.png",
+            "src": "/public/LG-AI.png",
             "sizes": "512x512",
             "type": "image/png"
         }

@@ -58,7 +58,9 @@ def responder_interface(rede: str, campo: str) -> str:
 
 
 # Interface Gradio
-with gr.Blocks(title="IA Clube LG") as demo:
+from src.theme import LGTheme
+
+with gr.Blocks(title="IA Clube LG", theme=LGTheme()) as demo:
     gr.HTML("""
         <head>
             <link rel="icon" href="/favicon.ico" sizes="any">
@@ -86,28 +88,19 @@ with gr.Blocks(title="IA Clube LG") as demo:
             "Você também pode baixar o modelo oficial da planilha e o manual."
         )
     
-    # Estatísticas
-    stats = analytics.get_stats()
-    with gr.Accordion("📊 Estatísticas de Uso", open=False):
-        gr.Markdown(f"""
-        - **Total de Redes Disponíveis:** {len(lista_redes)}
-        - **Total de Campos:** {len(lista_campos)}
-        - **Consultas Realizadas:** {stats['total_queries']}
-        """)
-    
     # Inputs
     with gr.Row():
         rede_dropdown = gr.Dropdown(
             choices=lista_redes,
             label="🏢 Selecione sua rede",
-            filterable=True,
-            info="Digite para filtrar as opções"
+            filterable=False,
+            interactive=True
         )
         campo_dropdown = gr.Dropdown(
             choices=lista_campos,
             label="📝 Selecione o campo que deseja verificar",
-            filterable=True,
-            info="Digite o nome do campo para buscar"
+            filterable=False,
+            interactive=True
         )
     
     # Botão e resultado
@@ -132,98 +125,112 @@ with gr.Blocks(title="IA Clube LG") as demo:
             value=str(Config.MANUAL_FILE),
             label="📘 Baixar manual oficial (.pdf)"
         )
+    
+    # Version Footer
+    gr.Markdown(
+        f"<div style='text-align: center; color: #999; margin-top: 20px; font-size: 0.8rem;'>v2.3 Mobile-First - {Config.MANUAL_FILE.name}</div>", 
+        elem_classes=["footer-links"]
+    )
 
-# CSS
+# CSS Styling - Overrides for Mobile-First Design
 gr.HTML("""
 <style>
-/* Reset & Base */
-body, .gradio-container {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
+/* Force Font Family */
+.gradio-container {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
 }
 
-/* Header */
+/* Header Container Styling */
 .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-bottom: 1px solid #e9ecef;
-    margin-bottom: 1rem;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
-.header-icon {
-    height: 48px;  /* Increased slightly for legibility of the new logo, but kept contained */
-    object-fit: contain;
-    margin-right: 12px;
-}
-h2 {
+
+.header-container h2 {
+    color: #A50034 !important; /* LG Red */
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
     margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
 }
 
-/* Mobile optimizations */
-@media (max-width: 768px) {
-    .header-icon {
-        height: 40px; /* Smaller on mobile */
-    }
-    .gradio-container {
-        padding: 0px !important;
-    }
-/* ... rest of CSS ... */
-    .main {
-        padding: 10px !important;
-    }
-    textarea, input, select, .gr-input {
-        font-size: 16px !important; /* Prevents iOS zoom */
-        padding: 12px !important;
-        height: auto !important;
-    }
-    button {
-        padding: 16px !important;
-        font-size: 18px !important;
-    }
+/* Main Content Area */
+.main-content {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Results */
+/* Inputs Styling */
+.gr-form {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Custom Dropdown Styling */
+label.svelte-1f354aw-container {
+    background: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    padding: 8px !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+/* Primary Button Styling - PILL SHAPE */
+button.primary {
+    background-color: #A50034 !important;
+    color: white !important;
+    border-radius: 9999px !important; /* Pill shape */
+    padding: 16px 32px !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    box-shadow: 0 4px 14px rgba(165, 0, 52, 0.4) !important;
+    transition: transform 0.2s ease !important;
+    border: none !important;
+    width: 100%;
+}
+button.primary:hover {
+    transform: scale(1.02);
+    background-color: #850029 !important;
+}
+
+/* Response Box */
 .resposta-ia {
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 16px;
-  margin-top: 15px;
-  border: 1px solid #ccc;
-  background-color: #ffffff;
-  color: #222;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-.resposta-bloco {
-  margin-top: 10px;
-  padding: 15px;
-  border-left: 5px solid #4EA1FF;
-  border-radius: 6px;
-  background-color: #f8f9fa;
-  color: #222;
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #A50034;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-top: 2rem;
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  .resposta-ia {
-    background-color: #1e1e1e;
-    color: #eee;
-    border-color: #444;
-  }
-  .header-container {
-      background: #1e1e1e;
-      border-color: #333;
-  }
-  h2 { color: #eee; }
-  .resposta-bloco {
-    background-color: #2b2b2b;
-    color: #eee;
-    border-color: #4EA1FF;
-  }
+/* Footer Section */
+.footer-links {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+/* Mobile Specific Adjustments */
+@media (max-width: 640px) {
+    .gradio-container {
+        padding: 16px !important;
+    }
+    .header-container {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+    .header-container h2 {
+        font-size: 1.4rem !important;
+    }
+    button.primary {
+        padding: 18px !important;
+        font-size: 1.15rem !important;
+    }
 }
 </style>
 """)

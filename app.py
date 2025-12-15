@@ -62,6 +62,7 @@ with gr.Blocks(title="IA Clube LG") as demo:
     gr.HTML("""
         <head>
             <link rel="icon" href="/favicon.ico" sizes="any">
+            <link rel="apple-touch-icon" href="/public/favicon-lg.png">
             <link rel="manifest" href="/app-manifest.json">
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
             <link rel="apple-touch-startup-image" href="/public/LG-AI.png">

@@ -36,4 +36,9 @@ async def favicon():
     return FileResponse(os.path.join(assets_directory, "fav-lg.ico"))
 
 # 2. Montar Gradio
-app = gr.mount_gradio_app(app, demo, path="/")
+app = gr.mount_gradio_app(
+    app, 
+    demo, 
+    path="/",
+    favicon_path=os.path.join(assets_directory, "fav-lg.ico")
+)

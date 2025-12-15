@@ -33,7 +33,7 @@ async def service_worker():
 
 @app.get("/favicon.ico")
 async def favicon():
-    return FileResponse(os.path.join(assets_directory, "favicon-lg.png"))
+    return FileResponse(os.path.join(assets_directory, "fav-lg.ico"))
 
 # 2. Montar Gradio
 app = gr.mount_gradio_app(app, demo, path="/")

@@ -58,11 +58,13 @@ def responder_interface(rede: str, campo: str) -> str:
 
 
 # Interface Gradio
-with gr.Blocks(title="IA Clube LG - Assistente Técnico") as demo:
+with gr.Blocks(title="IA Clube LG") as demo:
     gr.HTML("""
         <head>
+            <link rel="icon" href="/favicon.ico" sizes="any">
             <link rel="manifest" href="/app-manifest.json">
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+            <link rel="apple-touch-startup-image" href="/public/LG-AI.png">
             <script>
                 if ('serviceWorker' in navigator) {
                     navigator.serviceWorker.register('/sw.js')
@@ -72,7 +74,6 @@ with gr.Blocks(title="IA Clube LG - Assistente Técnico") as demo:
             </script>
         </head>
         <div class="header-container">
-            <img src="/public/favicon-lg.png" class="header-icon">
             <h2>Assistente Técnico - Clube LG</h2>
         </div>
     """, visible=True)
@@ -152,7 +153,8 @@ body, .gradio-container {
     margin-bottom: 1rem;
 }
 .header-icon {
-    height: 32px;
+    height: 48px;  /* Increased slightly for legibility of the new logo, but kept contained */
+    object-fit: contain;
     margin-right: 12px;
 }
 h2 {
@@ -163,9 +165,13 @@ h2 {
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
+    .header-icon {
+        height: 40px; /* Smaller on mobile */
+    }
     .gradio-container {
         padding: 0px !important;
     }
+/* ... rest of CSS ... */
     .main {
         padding: 10px !important;
     }

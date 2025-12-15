@@ -13,7 +13,7 @@
             "type": "image/png"
         },
         {
-            "src": "/public/LG-AI.png",
+            "src": "/public/favicon-lg.png",
             "sizes": "512x512",
             "type": "image/png"
         }

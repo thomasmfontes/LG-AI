@@ -8,12 +8,12 @@
     "description": "Assistente de validação de planilhas Clube LG",
     "icons": [
         {
-            "src": "/public/favicon-lg.png",
+            "src": "/public/fav-ai-lg.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/public/favicon-lg.png",
+            "src": "/public/fav-ai-lg.png",
             "sizes": "512x512",
             "type": "image/png"
         }

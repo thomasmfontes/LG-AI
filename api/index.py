@@ -1,5 +1,8 @@
+from fastapi import FastAPI
+import gradio as gr
 from app import demo
 
-# Vercel requer que a variável se chame 'app'
-# O Gradio (demo) expõe o app FastAPI em demo.app
-app = demo.app
+# Workaround para erro de Jinja2 no Vercel/Serverless
+# Criamos uma nova instância FastAPI e montamos o Gradio nela
+app = FastAPI()
+app = gr.mount_gradio_app(app, demo, path="/")
